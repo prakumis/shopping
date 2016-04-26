@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+	<contextName>SHOP</contextName>
+	<!-- contextListener class="com.ericsson.etme.processing.logging.listener.LoggerStartupListener"/-->
+	
+	<!-- proxy,common,util,web log appender -->
+	<appender name="SHOP-GENERAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_LOC}/shop.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss,SSS}] %-5level [%file %method] - %msg%n</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOG_LOC}/archived/shop.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+	
+	<!-- asset management log appender -->
+	<appender name="SHOP-CATALOG-MANAGEMENT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_LOC}/shop-catalog-management.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss,SSS}] %-5level [%file %method] - %msg%n</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOG_LOC}/archived/shop-catalog-management.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+	
+	<!-- dashboard log appender -->
+	<appender name="SHOP-DASHBOARD-REPORTS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_LOC}/shop-dashboard-reports.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!-- <Pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</Pattern> -->
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss,SSS}] %-5level [%file %method] - %msg%n</Pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${LOG_LOC}/archived/shop-dashboard-reports.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+
+	  
+	<logger name="com.nyp.shopping.catalog" level="DEBUG" additivity="false">
+		<appender-ref ref="SHOP-CATALOG-MANAGEMENT" />
+	</logger>
+	
+	<logger name="com.nyp.shopping.reports" level="DEBUG" additivity="false">
+		<appender-ref ref="SHOP-DASHBOARD-REPORTS" />
+	</logger>
+	
+	<logger name="com.nyp.shopping" level="DEBUG">
+		<appender-ref ref="SHOP-GENERAL" />
+	</logger>
+	
+	<logger name="org.springframework" level="ERROR">
+		<appender-ref ref="SHOP-GENERAL" />
+	</logger>
+	
+	<logger name="net.sf.ehcache" level="ERROR">
+		<appender-ref ref="SHOP-GENERAL" />
+	</logger>
+	
+	<logger name="org.hibernate" level="ERROR">
+		<appender-ref ref="SHOP-GENERAL" />
+	</logger>
+
+	<root level="DEBUG">
+		<appender-ref ref="SHOP-GENERAL" />
+	</root>
+
+</configuration>

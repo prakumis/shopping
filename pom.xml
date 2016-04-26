@@ -1,0 +1,143 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.nyp.shopping</groupId>
+	<artifactId>shopping</artifactId>
+	<version>${version.project}</version>
+	<packaging>pom</packaging>
+
+	<name>Main Shopping Application</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.plugin.version>1.8</maven.compiler.plugin.version>
+		<version.project>0.0.1-SNAPSHOT</version.project>
+		<version.java>1.7</version.java>
+		<version.project1>00.01.01</version.project1>
+		<version.spring>4.1.4.RELEASE</version.spring>
+		<version.jackson-mapper-asl>1.9.13</version.jackson-mapper-asl>
+		<version.slf4j>1.7.5</version.slf4j>
+		<version.spring-data-jpa>1.9.0.RELEASE</version.spring-data-jpa>
+		<version.jpa-hibernate>1.0.1.Final</version.jpa-hibernate>
+		<version.hibernate>4.3.11.Final</version.hibernate>
+		<!-- <version.hibernate>4.3.5.Final</version.hibernate> -->
+		<version.mysql>5.1.32</version.mysql>
+		<version.aspectj>1.7.4</version.aspectj>
+		<version.org.slf4j>1.7.16</version.org.slf4j>
+		<version.ch.qos.logback>1.1.5</version.ch.qos.logback>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>4.2.4.RELEASE</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-dbcp2</artifactId>
+				<version>2.1.1</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.38</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<version>3.2</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${version.spring}</version>
+				<exclusions>
+					<exclusion>
+						<artifactId>commons-logging</artifactId>
+						<groupId>commons-logging</groupId>
+					</exclusion>
+
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-log4j12</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.quartz-scheduler</groupId>
+						<artifactId>quartz</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>${resteasy.version}</version>
+				<!--scope>provided</scope -->
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxb-provider</artifactId>
+				<version>${resteasy.version}</version>
+				<!--scope>provided</scope -->
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson.mapper.version}</version>
+			</dependency>
+
+
+			<!-- QuartzJobBean in spring-context-support.jar -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context-support</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+
+			<!-- Spring + Quartz need transaction -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+
+			<!-- Quartz framework -->
+			<!-- <dependency> <groupId>org.quartz-scheduler</groupId> <artifactId>quartz</artifactId> 
+				<version>2.1.7</version> </dependency> -->
+
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>shop-catalog</module>
+		<module>shop-web</module>
+		<module>shop-usermgmt</module>
+		<module>shop-cartmgmt</module>
+		<module>shop-common</module>
+	</modules>
+</project>

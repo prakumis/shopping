@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<!-- Authentication -->
+	<http auto-config="true" use-expressions="true" create-session="never">
+		<intercept-url pattern="/login*" access="permitAll" />
+		<intercept-url pattern="/welcome*" access="isAuthenticated()" />
+		<intercept-url pattern="/reports/*" access="hasRole('REPORT_ADMIN')" />
+		<intercept-url pattern="/emp/*" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/module1/*" access="hasRole('ROLE_ADMIN')" />
+		<form-login login-page="/login" authentication-failure-url="/login?error"
+			default-target-url="/welcome" always-use-default-target="true" />
+		<logout logout-success-url="/login?logout" />
+	</http>
+
+	<!-- Old dummy code for authentication using hard coded xml config
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="Praveen" password="Yash@123" authorities="ROLE_ADMIN, REPORTS" />
+				<user name="jimi" password="jimispassword" authorities="ROLE_USER, ROLE_ADMIN" />
+				<user name="bob" password="bobspassword" authorities="ROLE_USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>	-->
+
+	<!-- Old dummy code for authentication using ldap 	-->
+	<authentication-manager>
+		<authentication-provider ref="ldapAuthProvider" />
+	</authentication-manager>
+
+	<beans:bean id="ldapAuthProvider"
+		class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+		<beans:constructor-arg>
+			<beans:bean
+				class="org.springframework.security.ldap.authentication.BindAuthenticator">
+				<beans:constructor-arg ref="contextSource" />
+				<beans:property name="userSearch" ref="userSearch" />
+			</beans:bean>
+		</beans:constructor-arg>
+	</beans:bean>
+
+	<beans:bean id="contextSource"
+		class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
+		<beans:constructor-arg value="ldap://springframework.org:389/" />
+		<beans:property name="userDn"
+			value="cn=manager,dc=springframework,dc=org" />
+		<beans:property name="password" value="ldapPassword" />
+		<beans:property name="pooled" value="false" />
+	</beans:bean>
+	<beans:bean id="userSearch"
+		class="org.springframework.security.ldap.search.FilterBasedLdapUserSearch">
+		<!-- searchBase, searchFilter, contextSource -->
+		<beans:constructor-arg index="0"
+			value="ou=groups,dc=springframework,dc=org" />
+		<beans:constructor-arg index="1" value="uid={0}" />
+		<beans:constructor-arg index="2" ref="contextSource" />
+	</beans:bean>
+
+</beans:beans>
