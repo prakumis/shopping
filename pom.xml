@@ -29,6 +29,22 @@
 		<version.ch.qos.logback>1.1.5</version.ch.qos.logback>
 	</properties>
 
+	<!-- <build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.compiler.plugin.version}</version>
+					<configuration>
+						<source>${version.java}</source>
+						<target>$(version.java)</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build> -->
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
