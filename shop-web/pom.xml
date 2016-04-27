@@ -1,11 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.nyp.shopping</groupId>
+		<artifactId>shopping</artifactId>
+		<version>${version.project}</version>
+	</parent>
+
 	<!-- <groupId>com.nyp.shopping</groupId> -->
 	<artifactId>shop-web</artifactId>
 	<packaging>war</packaging>
 	<name>Shopping Web Application</name>
 	<url>http://maven.apache.org</url>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -80,23 +88,30 @@
 			<artifactId>spring-web</artifactId>
 		</dependency>
 	</dependencies>
+
 	<build>
-		<finalName>shop-web</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>${version.java}</source>
+					<target>${version.java}</target>
 				</configuration>
 			</plugin>
+			<!-- <plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>../dist</directory>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin> -->
 		</plugins>
 	</build>
-	<parent>
-		<groupId>com.nyp.shopping</groupId>
-		<artifactId>shopping</artifactId>
-		<version>${version.project}</version>
-	</parent>
+
 </project>

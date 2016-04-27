@@ -2,20 +2,20 @@
 
 set -x
 # Usually User need to change the following POM location only
-ETME_MAIN_POM_LOCATION="D:\EriTech\WS\WS_MyApp_New\shopping"
+SHOP_MAIN_POM_LOCATION="D:\EriTech\WS\WS_MyApp_New\shopping"
 PROJECT_VERSION="0.0.1-SNAPSHOT"
 
 # Usually User don't need to change the following
-ETME_WAR_LOCATION="$ETME_MAIN_POM_LOCATION/etme-gateway-web/target"
+SHOP_WAR_LOCATION="$SHOP_MAIN_POM_LOCATION/shop-web/target"
 WAR_FILE_NAME="etme-web-${PROJECT_VERSION}.war"
-STATIC_CODE_GIT_LOC="$ETME_MAIN_POM_LOCATION/etme-gui-projects/"
-ETME_CONFIG_PATH="${ETME_MAIN_POM_LOCATION}/etme-gateway-web/src/main/resources"
+STATIC_CODE_GIT_LOC="$SHOP_MAIN_POM_LOCATION/etme-gui-projects/"
+SHOP_CONFIG_PATH="${SHOP_MAIN_POM_LOCATION}/etme-gateway-web/src/main/resources"
 
 JBOSS_HOME_LOC="D:/EriTech/AppServers/etme_jboss-as-7.1.1.Final_nilabja"
 JBOSS_DEPLOYEMENT_PATH="$JBOSS_HOME_LOC/standalone/deployments"
 TEMP_FILE_TO_DELETE_LOCATION="$JBOSS_HOME_LOC/standalone/tmp/vfs"
 RUN_JBOSS_SCRIPT_LOCATION="$JBOSS_HOME_LOC/bin"
-JBOSS_ETME_CONFIG_PATH="$JBOSS_HOME_LOC/standalone/configuration/etme_config"
+JBOSS_SHOP_CONFIG_PATH="$JBOSS_HOME_LOC/standalone/configuration/etme_config"
 
 APACHE_HOME_LOC="C:/Apache24/htdocs"
 DATE_FORMAT='%Y%m%d-%H%M'
@@ -37,7 +37,7 @@ deployStatic() {
 
 mavenBuild() {
 
-	cd $ETME_MAIN_POM_LOCATION
+	cd $SHOP_MAIN_POM_LOCATION
 	echo "Running mvn clean install"
 	mvn clean install
 	echo "mvn clean install completed"
@@ -45,13 +45,13 @@ mavenBuild() {
 
 deployWar() {
 
-	#echo "Copying config files from $ETME_CONFIG_PATH to $JBOSS_ETME_CONFIG_PATH"
-	#cd $ETME_CONFIG_PATH
-	#cp -f action-businesssvc-mapping.xml $JBOSS_ETME_CONFIG_PATH/
-	#cp -f common-user-function.properties $JBOSS_ETME_CONFIG_PATH/
+	#echo "Copying config files from $SHOP_CONFIG_PATH to $JBOSS_SHOP_CONFIG_PATH"
+	#cd $SHOP_CONFIG_PATH
+	#cp -f action-businesssvc-mapping.xml $JBOSS_SHOP_CONFIG_PATH/
+	#cp -f common-user-function.properties $JBOSS_SHOP_CONFIG_PATH/
 
 	echo "Copying war file to jboss"
-	cd $ETME_WAR_LOCATION
+	cd $SHOP_WAR_LOCATION
 	cp $WAR_FILE_NAME $JBOSS_DEPLOYEMENT_PATH
 	cd $TEMP_FILE_TO_DELETE_LOCATION
 	echo "Deleting old tmp files from "$TEMP_FILE_TO_DELETE_LOCATION
