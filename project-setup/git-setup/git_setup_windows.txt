@@ -1,0 +1,46 @@
+===================================================================================================================================
+Install MSysGit
+===================================================================================================================================
+    Go to http://msysgit.github.io/
+    Download the latest version available.
+    Run the installer.
+        Tick the check boxes for "Windows Explorer integration".
+        Choose "Run Git from the Windows Command Prompt"
+        If asked which SSH executable use, choose OpenSSH.
+        Choose "Checkout as is, commit Unix-style line endings". 
+===================================================================================================================================
+
+Configure Git
+
+Git should now be installed. Perform the following steps to configure it.
+
+    The default home directory points to Z:\ or H:\. You should change this to C:\Users\<signum>, so that your settings are available when you are offline. To do that, create/set an environment variable with that value called HOME: 
+
+- Start Control Panel and select System -> Advanced system settings -> Environment variables.  In the User variables section, select variable HOME and ensure that it is set to C:\Users\<signum>.
+
+    Start Git Bash (either from the Start Menu or by right-clicking any folder in Windows Explorer).
+    Execute the following commands 
+
+git config --global user.name "<your_corpsig>" (e.g. lmcpare)
+git config --global user.email "<your.name>@company.com"
+git config --global http.proxy www-proxy.company.se:8080
+git config --global core.autocrlf input
+git config --global color.ui true
+git config --global gui.encoding utf-8
+git config --global push.default tracking
+git config --global core.excludesfile <your-HOME>/.gitignore
+
+The --global flag means that the configuration should apply to all your repositories (unless overridden). The configuration is stored in ~/.gitconfig.
+
+If you like, you can also create aliases for common commands like:
+
+git config --global alias.co checkout
+git config --global alias.ci commit
+git config --global alias.st status
+git config --global alias.br branch
+git config --global alias.lol "log --graph --decorate --oneline"
+
+
+I also found it useful to alias the clone command. This instruction tells you how to:
+Clone alias
+.....................................................................................................................................................................................................................................................
