@@ -6,28 +6,35 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>Archetype Created Web Application</display-name>
 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value><!-- classpath:/config/spring/springWebApp-service.xml --> 
+		<!-- classpath:/config/spring/springWebApp-persistence.xml -->
+		</param-value>
+	</context-param>
+
 	<listener>
     	<listener-class>com.nyp.shopping.web.listener.LogbackConfigListener</listener-class>
 	</listener>
-	<!-- <listener>
+	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener> -->
+	</listener>
 	<!-- <listener>
 		<listener-class>com.sadarbazaar.shoppingweb.web.listener.ApplicationCacheListener</listener-class>
 	</listener> -->
 
-	<!-- <servlet>
-		<servlet-name>springWebApp</servlet-name>
+	<servlet>
+		<servlet-name>shoppingApp</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:/config/spring/springWebApp-servlet.xml</param-value>
+			<param-value>classpath:/config/spring/shoppingApp-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>springWebApp</servlet-name>
+		<servlet-name>shoppingApp</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping> -->
+	</servlet-mapping>
 
 </web-app>

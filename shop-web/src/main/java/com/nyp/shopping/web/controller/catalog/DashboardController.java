@@ -3,30 +3,30 @@
  */
 package com.nyp.shopping.web.controller.catalog;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.nyp.shopping.catalog.service.DashboardService;
+import com.nyp.shopping.common.entity.Employee;
 
 
 /**
  * @author Praveen
  *
  */
-@Controller
+@RestController
 @RequestMapping("/")
 public class DashboardController {
 
 	private static final Logger logger = LoggerFactory.getLogger(DashboardController.class);
 
-	@Inject
+	//@Inject
 	private DashboardService dashboardService;
 
 	public DashboardController() {
@@ -41,13 +41,17 @@ public class DashboardController {
 	}
 
 	@RequestMapping("/")
-	public String init(Model model, HttpServletRequest request) {
+	public Employee init(Model model, HttpServletRequest request) {
 
 		logger.info("Init DashboardController Invoked");
+		System.out.println("Init DashboardController Invoked");
 		//Map<ProductCategory, Set<ProductCategory>> productCategoryMap = dashboardService.getProductCategoryMap(null);
 		//model.addAttribute(productCategoryMap);
 		//request.setAttribute("productCategoryMap", productCategoryMap);
-		return "sc.dashboard";
+		Employee emp = new Employee();
+		emp.setEmpId(100L);
+		emp.setEmpName("Praveen Kumar Mishra");
+		return emp;
 	}
 
 	@RequestMapping("/loaddeptmenu/{deptId}")
