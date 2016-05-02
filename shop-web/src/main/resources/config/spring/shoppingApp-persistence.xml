@@ -16,8 +16,7 @@
         http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<!-- Scan for Services & DAOs -->
-	<context:component-scan base-package="com.sadarbazaar.shoppingweb.repository" />
-	<jpa:repositories base-package="com.sadarbazaar.shoppingweb.repository" />
+	<jpa:repositories base-package="com.nyp.shopping.common.repository" />
 
 	<!-- Persistence framework specific entityManagerFactory (JPA) or sessionFactory (Hibernate) entries come here -->
 	<!-- The JPA EntityManagerFactory Instance -->
@@ -25,16 +24,16 @@
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
 		lazy-init="true">
 		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="shoppingweb" />
+		<property name="persistenceUnitName" value="shopping" />
 		<property name="packagesToScan">
 			<list>
-				<value>com.sadarbazaar.shoppingweb.entity</value>
+				<value>com.nyp.shopping.common.entity</value>
 			</list>
 		</property>
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-				<property name="generateDdl" value="false" />
+				<property name="generateDdl" value="true" />
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
@@ -43,7 +42,7 @@
 			1. The below properties override the values set in ec-persistence.xml, if any.
 			2. ehcache configuration settings doesn't work when configured in ec-persistence.xml -->
 			<props>
-				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
 				<prop key="hibernate.cache.use_query_cache">true</prop>
 				<prop key="hibernate.cache.use_second_level_cache">true</prop>
@@ -90,16 +89,16 @@
 	<!-- Configurer that replaces ${...} placeholders with values from a properties file -->
 	<!-- (in this case, JDBC-related settings for the JPA EntityManager and 
 		DataSource definitions below) -->
-	<context:property-placeholder location="/WEB-INF/config/jdbc.properties" />
+	<context:property-placeholder location="classpath:/config/database/jdbc.properties" />
 
-	<!--  Apache commons dbcp datasource-->
+	<!--  Apache commons dbcp datasource - - >
 	<bean id="dataSource_not_used" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/yashdb" />
 		<property name="username" value="yash" />
 		<property name="password" value="mishra" />
-	</bean>
+	</bean>	-->
 
 
 </beans>

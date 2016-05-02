@@ -122,6 +122,62 @@
 	            <artifactId>spring-tx</artifactId>
 	            <version>${version.spring}</version>
 	        </dependency>
+			<!-- Spring ORM -->
+	        <dependency>
+	            <groupId>org.springframework</groupId>
+	            <artifactId>spring-orm</artifactId>
+	            <version>${version.spring}</version>
+	        </dependency>
+			<!-- Spring Data	-->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${version.spring-data-jpa}</version>
+			</dependency>
+
+			<!-- Persistence API -->
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>1.0</version>
+			</dependency>
+
+			<!-- Hibernate -->
+	        <dependency>
+	            <groupId>org.hibernate</groupId>
+	            <artifactId>hibernate-core</artifactId>
+	            <version>${version.hibernate}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.hibernate</groupId>
+	            <artifactId>hibernate-entitymanager</artifactId>
+	            <version>${version.hibernate}</version>
+	        </dependency>
+			<!-- Hibernate EHCache -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-ehcache</artifactId>
+	            <version>${version.hibernate}</version>
+			</dependency>
+
+			<!-- C3P0 connection pool -->
+			<dependency>
+				<groupId>c3p0</groupId>
+				<artifactId>c3p0</artifactId>
+				<version>0.9.1.2</version>
+			</dependency>		
+
+			<!-- AspectJ -->
+	        <dependency>
+	            <groupId>org.aspectj</groupId>
+	            <artifactId>aspectjrt</artifactId>
+	            <version>${version.aspectj}</version>
+	        </dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${version.aspectj}</version>
+			</dependency>
 
 			<!-- Dependency for json api: jackson -->
 			<dependency>
@@ -211,10 +267,10 @@
 		</dependency>
 	</dependencies>
 	<modules>
-		<module>shop-catalog</module>
 		<module>shop-web</module>
+		<module>shop-common</module>
+		<module>shop-catalog</module>
 		<module>shop-usermgmt</module>
 		<module>shop-cartmgmt</module>
-		<module>shop-common</module>
 	</modules>
 </project>
